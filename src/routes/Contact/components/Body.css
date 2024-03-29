@@ -1,0 +1,98 @@
+.contact__body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.contact__body__reach__infinityTextContainer {
+  /* font-style: italic; */
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-highlight);
+  /* border-bottom: 1px solid var(--color-black);
+    border-top: 1px solid var(--color-black); */
+  /* opacity: 0; */
+  z-index: 25;
+}
+
+.contact__body__reach__infinityText {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: var(--fw-light);
+  padding-inline: 0.4rem;
+  color: var(--color-black);
+  display: flex;
+  justify-content: center;
+}
+
+.contact__body__reach__infinityTextLogoSVG {
+  display: inline-block;
+  height: 2rem;
+  width: calc(2rem / 600 * 759);
+}
+
+.contact__body__reach__infinityTextLogoSVGPath {
+  fill: var(--color-black);
+}
+
+.contact__body__what__infinityTextContainer {
+  /* font-style: italic; */
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-highlight);
+  /* border-bottom: 1px solid var(--color-black);
+    border-top: 1px solid var(--color-black); */
+  /* opacity: 0; */
+  z-index: 25;
+}
+
+.contact__body__what__infinityText {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: var(--fw-light);
+  padding-inline: 0.4rem;
+  color: var(--color-black);
+  display: flex;
+  justify-content: center;
+}
+
+.contact__body__what__infinityTextLogoSVG {
+  display: inline-block;
+  height: 2rem;
+  width: calc(2rem / 600 * 759);
+}
+
+.contact__body__what__infinityTextLogoSVGPath {
+  fill: var(--color-black);
+}
+
+.contact__body__bodyContainer {
+  width: 100%;
+  /* padding-block: 50%; */
+}
+
+.contact__body__text {
+  position: relative;
+  margin-block-start: calc(15% - 2.5rem);
+  color: var(--color-highlight);
+  text-transform: uppercase;
+  line-height: 1.1;
+  /* text-align: justify;
+    text-justify: inter-word; */
+  padding-inline: 20px;
+  padding-block-end: 15%;
+  z-index: 1;
+  /* opacity: 0; */
+  /* text-align: center; */
+}

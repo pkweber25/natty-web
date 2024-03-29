@@ -1,0 +1,46 @@
+.about__body__timelapse__year {
+  background-color: var(--color-primary);
+  height: 19vh;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  font-size: 14rem;
+  text-transform: uppercase;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  color: var(--color-highlight);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about__body__timelapse {
+  min-height: 100vh;
+  width: 100%;
+  /* background-color: var(--color-highlight); */
+}
+
+.about__body__timelapse__slides {
+  display: flex;
+  height: 27vh;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  opacity: 0;
+}
+
+.about__body__timelapse__slides.rightToLeft {
+  flex-direction: row-reverse;
+}
+
+.about__body__timelapse__slide {
+  width: 100vw;
+  height: 100%;
+}
+
+.about__body__timelapse__img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}

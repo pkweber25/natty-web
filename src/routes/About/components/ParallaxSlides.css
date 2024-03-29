@@ -1,0 +1,119 @@
+.parallax__slides {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.parallax__slide {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.parallax__slideBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  /* will-change: transform; */
+  background-size: cover;
+  z-index: -1;
+  /* filter: grayscale(100%); */
+}
+
+.parallax__slideNaturally {
+  font-size: 4rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  color: var(--color-highlight);
+  /* display: flex;
+    justify-content: center; */
+}
+
+.parallax__slideSharp {
+  text-transform: none;
+  font-weight: var(--fw-regular);
+  font-family: Alegreya, serif;
+  font-size: 8rem;
+  font-style: italic;
+  color: var(--color-primary);
+  /* mix-blend-mode: hard-light; */
+}
+
+.parallax__slideOverlay {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+  position: relative;
+  /* left: 0;
+    top: 0; */
+  z-index: 0;
+}
+
+/* .parallax__slideOverlay1 {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-primary);
+    opacity: 0.6;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  }
+  
+  .parallax__slideOverlay2 {
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-highlight);
+    opacity: 0.7;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+  } */
+
+.parallax__infinityTextContainer {
+  /* font-style: italic; */
+  position: relative;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--color-black);
+  /* border-bottom: 1px solid var(--color-black);
+      border-top: 1px solid var(--color-black); */
+  /* opacity: 0; */
+}
+
+.parallax__infinityText {
+  font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: var(--fw-light);
+  padding-inline: 0.4rem;
+  color: var(--color-primary);
+  display: flex;
+  justify-content: center;
+}
+
+.parallax__infinityTextLogoSVG {
+  display: inline-block;
+  height: 2rem;
+  width: calc(2rem / 600 * 759);
+}
+
+.parallax__infinityTextLogoSVGPath {
+  fill: var(--color-primary);
+}
