@@ -51,7 +51,7 @@
 
 .boys__body__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 2.5rem;
   padding-inline: 2rem;
   max-width: 1100px;
