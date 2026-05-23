@@ -38,32 +38,28 @@ const Stream = () => {
       //   scrub: 2,
       // });
 
-      const stream = document.querySelector<HTMLDivElement>(".home__stream");
-
-      const infinityContainer = stream?.querySelector<HTMLDivElement>(
-        ".home__stream__infinityTextContainer"
-      );
-
-      const infinityContainerHeight = infinityContainer?.offsetHeight;
-
       const extraPixels = 300;
 
       const parallaxTimeline = gsap
         .timeline()
-        .from(".home__stream__albumTitleWord--one", { yPercent: 150, duration: 0.5 }).from(".home__stream__albumTitleWord--more",
+        .from(".home__stream__albumTitleWord--one", { yPercent: 150, duration: 0.5 })
+        .from(".home__stream__albumTitleWord--more",
           { yPercent: 150, duration: 0.5 },
           ">-0.1"
-        ).from(".home__stream__albumTitleWord--shot",
+        )
+        .from(".home__stream__albumTitleWord--shot",
           { yPercent: 150, duration: 0.5 },
           ">-0.1"
         )
         .from(
           ".home__stream__albumArtDudesContainer",
-          {
-            yPercent: 100,
-            scale: 1.6,
-            duration: 1.25,
-          },
+          { scale: 1.6, duration: 1.25 },
+          ">-0.25"
+        )
+        .fromTo(
+          ".home__stream__albumArtDudes",
+          { objectPosition: "50% 100%" },
+          { objectPosition: "50% 0%", duration: 1.25 },
           ">-0.25"
         )
         .from(
@@ -76,53 +72,17 @@ const Stream = () => {
           { yPercent: 80, scale: 0.6, autoAlpha: 0, duration: 1 },
           ">-0.5"
         )
+        .from(".home__stream__text", { autoAlpha: 0, yPercent: 10, duration: 0.75 })
         .from(".home__stream__listenBtn", { autoAlpha: 0, delay: 0.5 });
 
-      // ScrollTrigger.create({
-      //   trigger: ".home__stream__albumArtContainer",
-      //   start: "top top-=" + infinityContainerHeight,
-      //   end: "bottom top",
-      //   animation: parallaxTimeline,
-      //   scrub: 2,
-      // });
-
+      // Single ScrollTrigger: pin the section AND play the parallax animation
+      // across the same scroll distance
       ScrollTrigger.create({
-        trigger: ".home__stream__albumArtContainer",
-        start: "top top+=" + infinityContainerHeight,
-        end: "bottom top",
-        animation: parallaxTimeline,
-        scrub: 2,
-      });
-
-      // ScrollTrigger.create({
-      //   trigger: stream,
-      //   start: "top top-=" + infinityContainerHeight,
-      //   end: "bottom top-=300",
-      //   pin: true,
-      //   scrub: 2,
-      // });
-
-      ScrollTrigger.create({
-        trigger: stream,
+        trigger: ".home__stream",
         start: "top top",
         end: "bottom top-=" + extraPixels,
         pin: true,
-        scrub: 2,
-      });
-
-      ScrollTrigger.create({
-        trigger: infinityContainer,
-        start:
-          "top+=" + ((stream?.offsetHeight as number) + extraPixels) + " top",
-        end:
-          "top+=" +
-          ((stream?.offsetHeight as number) +
-            extraPixels +
-            (document.querySelector<HTMLDivElement>(
-              ".home__stream__albumArtContainer"
-            )?.offsetHeight as number)) +
-          " top",
-        pin: true,
+        animation: parallaxTimeline,
         scrub: 2,
       });
     }, streamRef);
@@ -159,12 +119,6 @@ const Stream = () => {
               className="home__stream__albumCover"
             />
           </div>
-          {/* <div className="home__stream__albumTitle">
-            <div className="home__stream__albumTitleLine1">
-              <span className="home__stream__albumTitleHighlight">In High</span>
-            </div>
-            <div className="home__stream__albumTitleLine2">Spirits</div>
-          </div> */}
           <div className="home__stream__albumTitle">
             <div className="home__stream__albumTitleRow">
               <div className="home__stream__albumTitleWord home__stream__albumTitleWord--one">One</div>
@@ -172,16 +126,15 @@ const Stream = () => {
               <div className="home__stream__albumTitleWord home__stream__albumTitleWord--shot">Shot</div>
             </div>
           </div>
+          <p className="home__stream__text">
+          Naturally Sharp's fifth studio album,{" "}
+          <span className="home__stream__textHighlight">One More Shot</span>, now
+          available on all streaming platforms.
+        </p>
           <a className="home__stream__listenBtn" href="https://open.spotify.com/album/4K2xusVE34XdQfp1AoLBo2?si=rz2gC-5jQXGlijLEqpGXBw" target="_blank" rel="noreferrer">
             Listen on Spotify
           </a>
         </div>
-
-        {/* <p className="home__stream__text">
-          Naturally Sharp's fourth studio album,{" "}
-          <span className="home__stream__textHighlight">In High Spirits</span>, now
-          available on all streaming platforms.
-        </p> */}
       </section>
     </div>
   );

@@ -1,15 +1,9 @@
 .home__stream {
   width: 100%;
-  /* min-height: 100vh; */
   height: 100vh;
-  /* background-color: var(--color-primary); */
-  /* padding-block: 60px; */
-  /* padding-inline: 20px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding-block-start: 40px; */
-  /* padding-block-end: 30vh; */
   overflow: hidden;
   position: relative;
   background-color: #350204;
@@ -53,15 +47,11 @@
 }
 
 .home__stream__albumArtContainer {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  /* Album layers: use ImageSlot in StreamParallax.tsx */
-  background-size: cover;
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: end;
 }
 
 .home__stream__albumArtSunContainer,
@@ -76,6 +66,7 @@
 
 .home__stream__albumArtDudesContainer {
   z-index: 1;
+  transform-origin: bottom center;
 }
 
 .home__stream__albumCoverContainer {
@@ -100,11 +91,20 @@
   object-fit: cover;
 }
 
-.home__stream__albumArtSun,
-.home__stream__albumArtDudes {
+.home__stream__albumArtSun {
   width: 100%;
-  /* height: 100%; */
+  height: 100%;
   object-fit: cover;
+}
+
+.home__stream__albumArtDudes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
 }
 
 .home__stream__albumContainer {
@@ -184,18 +184,19 @@
 }
 
 .home__stream__text {
-  position: relative;
-  margin-block-start: calc(15% - 2.5rem);
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  width: 100%;
   color: var(--color-highlight);
   text-transform: uppercase;
-  line-height: 1.1;
-  /* text-align: justify;
-  text-justify: inter-word; */
+  line-height: 1.2;
   padding-inline: 20px;
-  padding-block-end: 15%;
-  z-index: 1;
-  /* opacity: 0; */
+  z-index: 10;
   text-align: center;
+  font-size: 1.6rem;
+  font-weight: var(--fw-bold);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .home__stream__textHighlight {
@@ -211,7 +212,9 @@
 
 .home__stream__listenBtn {
   position: absolute;
-  bottom: 10%;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
   width: auto;
   padding: 12px 32px;
   display: flex;
@@ -220,18 +223,18 @@
   text-transform: uppercase;
   font-size: 1rem;
   border-radius: 100px;
-  color: #350204;
+  color: var(--color-highlight);
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(242, 224, 194, 0.25);
   z-index: 20;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .home__stream__listenBtn:hover {
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.75);
+  transform: translateX(-50%) scale(1.05);
 }

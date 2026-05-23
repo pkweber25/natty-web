@@ -19,7 +19,6 @@ class NattyEvent {
   image: string;
   imageHint: string;
   index: number;
-  eventCount: number;
 
   constructor(
     title: string,
@@ -28,8 +27,7 @@ class NattyEvent {
     descriptions: string[],
     image: string,
     imageHint: string,
-    index: number,
-    eventCount: number
+    index: number
   ) {
     this.title = title;
     this.time = time;
@@ -38,7 +36,6 @@ class NattyEvent {
     this.image = image;
     this.imageHint = imageHint;
     this.index = index;
-    this.eventCount = eventCount;
   }
 
   generateEvent() {
@@ -94,18 +91,7 @@ class NattyEvent {
               ))}
             </div>
           </div>
-          <div className="home__events__eventNumberIndicator">
-            {Array(this.eventCount)
-              .fill(0)
-              .map((_, idx: number) => (
-                <div
-                  key={idx}
-                  className={`home__event__eventNumberCircle ${
-                    idx === this.index ? " current" : ""
-                  }`}
-                ></div>
-              ))}
-          </div>
+
         </div>
       </article>
     );
@@ -365,7 +351,7 @@ const Events = () => {
           "home__events",
           3,
           "",
-          "Keeping Up with the Natty's"
+          "Keeping Up with Natty"
         )}
 
         <div className="home__events__mainContainer">
@@ -410,11 +396,7 @@ const Events = () => {
                     {desc}
                   </p>
                 ))}
-              </div>
-            </div>
-            <div className="home__events__eventNumberIndicator">
-              <div className="home__event__eventNumberCircle current"></div>
-            </div>
+              </div>          </div>
           </div>
         </div>
 
@@ -427,8 +409,7 @@ const Events = () => {
               descriptions,
               image,
               imageHint,
-              idx + 1,
-              nattyEventDescriptions.length + 1
+              idx + 1
             );
             return nattyEvent.generateEvent();
           }

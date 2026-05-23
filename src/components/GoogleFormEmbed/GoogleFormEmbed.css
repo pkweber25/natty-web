@@ -15,15 +15,39 @@
   font-size: var(--fs-p);
   color: var(--color-body);
   margin-block-end: 2rem;
-  font-weight: var(--fw-light);
+  font-weight: var(--fw-light);}
+
+.googleFormEmbed__linkWrapper {
+  text-align: center;
 }
 
-.googleFormEmbed__iframe {
-  width: 100%;
-  min-height: 600px;
-  border: none;
+.googleFormEmbed__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--color-primary);
+  color: var(--color-highlight);
+  font-size: 1.6rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  text-decoration: none;
   border-radius: 4px;
-  background: var(--color-highlight);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.googleFormEmbed__link:hover {
+  background-color: #a82b24;
+  transform: translateY(-2px);
+}
+
+.googleFormEmbed__link:active {
+  transform: translateY(0);
+}
+
+.googleFormEmbed__linkIcon {
+  font-size: 1.4rem;
 }
 
 .googleFormEmbed__placeholder {
@@ -43,30 +67,4 @@
   margin-block-start: 1rem;
   font-size: 1.4rem;
   opacity: 0.8;
-}
-
-.googleFormEmbed__settingsNote {
-  max-width: 900px;
-  margin-inline: auto;
-  margin-block-start: 2rem;
-  color: var(--color-body);
-  font-size: 1.4rem;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-.googleFormEmbed__settingsNote summary {
-  font-size: 1.4rem;
-  color: var(--color-primary);
-  cursor: pointer;
-}
-
-.googleFormEmbed__settingsNote ul {
-  margin-block: 0.75rem;
-  padding-inline-start: 1.5rem;
-}
-
-.googleFormEmbed__settingsNote li {
-  margin-block: 0.5rem;
-  line-height: 1.5;
 }

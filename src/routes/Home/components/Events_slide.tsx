@@ -144,7 +144,7 @@ const Events = () => {
           "home__events",
           3,
           "",
-          "Keeping Up with the Natty's"
+          "Keeping Up with Natty"
         )}
 
         <div className="home__events__mainContainer">

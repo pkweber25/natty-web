@@ -142,7 +142,7 @@ const Performances = () => {
         </div>
 
         <p className="about__body__performances__text">
-          Over the years, we’ve released several albums and EP's, hosted a concert every semester, and recently competed for the first time at CNU's Blue Tie Affair We are also proud to be featured
+          Over the years, we’ve released several albums and EP's, hosted a concert every semester, and recently competed for the first time at CNU's Blue Tie Affair. We are also proud to be featured
           in{" "}
           <span className="about__body__performances__textHighlight">
             BOCA 2014: Best Of College A Cappella
