@@ -5,55 +5,80 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import img1 from "../../../../assets/old_natty/2010.jpg";
-import img2 from "../../../../assets/old_natty/2011.jpg";
-import img3 from "../../../../assets/old_natty/2012.jpg";
-import img4 from "../../../../assets/old_natty/sinkland_2011.jpg";
-import img5 from "../../../../assets/old_natty/2011_2.jpg";
-import img6 from "../../../../assets/old_natty/2013.jpg";
-import img7 from "../../../../assets/old_natty/2002.jpeg";
-import img8 from "../../../../assets/old_natty/2017.jpg";
-import img9 from "../../../../assets/old_natty/2016_2.jpg";
-import img10 from "../../../../assets/old_natty/2017_2.jpg";
-import bow from "../../../../assets/group_photos/bow_compressed.jpg";
-import in_costume from "../../../../assets/group_photos/in_costume_mobile.jpg";
-import butter from "../../../../assets/group_photos/butter_mobile.jpg";
+import ImageSlot from "../../../../components/ImageSlot/ImageSlot";
+import { IMAGES } from "../../../../config/images";
+
+interface YearGroup {
+  year: number;
+  start: number;
+  count: number;
+}
+
+const YEAR_GROUPS: YearGroup[] = [
+  { year: 2008, start: 0, count: 3 },
+  { year: 2010, start: 3, count: 2 },
+  { year: 2011, start: 5, count: 2 },
+  { year: 2012, start: 7, count: 3 },
+  { year: 2013, start: 10, count: 2 },
+  { year: 2014, start: 12, count: 3 },
+  { year: 2015, start: 15, count: 1 },
+  { year: 2016, start: 16, count: 2 },
+  { year: 2017, start: 18, count: 3 },
+  { year: 2018, start: 21, count: 2 },
+  { year: 2019, start: 23, count: 2 },
+  { year: 2020, start: 25, count: 2 },
+  { year: 2021, start: 27, count: 1 },
+  { year: 2022, start: 28, count: 2 },
+  { year: 2023, start: 30, count: 3 },
+  { year: 2024, start: 33, count: 3 },
+];
+
+/** Generate a hint string for a given year and image index (1-based) */
+const hintFor = (year: number, idx: number) =>
+  `public/images/about/${year}.${idx}.png`;
 
 const Timelapse = () => {
   const timelapseRef = useRef(null);
-
   const mainClassPrefix = "about__body__timelapse";
+  const allImgs = IMAGES.about.timelapse;
 
-  const imgsLtr = [img1, img2, img8, bow];
-  const imgsRtl = [img4, img3, img9, in_costume];
-  const imgsLtr2 = [img7, img6, img10, butter];
+  // Distribute 16 year-groups across 3 rows (5 + 5 + 6)
+  const row1Groups = [YEAR_GROUPS[0], YEAR_GROUPS[3], YEAR_GROUPS[6], YEAR_GROUPS[9], YEAR_GROUPS[12]]; // 2008, 2012, 2015, 2018, 2021
+  const row2Groups = [YEAR_GROUPS[1], YEAR_GROUPS[4], YEAR_GROUPS[7], YEAR_GROUPS[10], YEAR_GROUPS[13]]; // 2010, 2013, 2016, 2019, 2022
+  const row3Groups = [YEAR_GROUPS[2], YEAR_GROUPS[5], YEAR_GROUPS[8], YEAR_GROUPS[11], YEAR_GROUPS[14], YEAR_GROUPS[15]]; // 2011, 2014, 2017, 2020, 2023, 2024
 
-  const createLtrSlides = function (imgs: string[]) {
+  const createYearSlide = (group: YearGroup, dir: string) => {
+    const imgs: string[] = [];
+    for (let i = 0; i < group.count; i++) {
+      imgs.push(allImgs[group.start + i]);
+    }
+
     return (
-      <div className={mainClassPrefix + "__slides leftToRight"}>
-        {imgs.map((img, idx: number) => (
-          <div className={mainClassPrefix + "__slide leftToRight"} key={idx}>
-            <img src={img} alt="" className={mainClassPrefix + "__img"} />
-          </div>
-        ))}
+      <div className={`${mainClassPrefix}__slide ${dir}`} key={group.year}>
+        <div className={`${mainClassPrefix}__slideImages`}>
+          {imgs.map((img, i) => (
+            <ImageSlot
+              key={i}
+              src={img}
+              hint={hintFor(group.year, i + 1)}
+              alt={`Naturally Sharp ${group.year}`}
+              className={`${mainClassPrefix}__slideImg`}
+            />
+          ))}
+        </div>
       </div>
     );
   };
 
-  const createRtlSlides = function (imgs: string[]) {
-    return (
-      <div className={mainClassPrefix + "__slides rightToLeft"}>
-        {imgs.map((img, idx: number) => (
-          <div className={mainClassPrefix + "__slide rightToLeft"} key={idx}>
-            <img src={img} alt="" className={mainClassPrefix + "__img"} />
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const createRow = (groups: YearGroup[], dir: string) => (
+    <div className={`${mainClassPrefix}__slides ${dir}`}>
+      {groups.map((g) => createYearSlide(g, dir))}
+    </div>
+  );
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // --- fade in the year label ---
       ScrollTrigger.create({
         trigger: ".about__body__timelapseContainer",
         start: "top 70%",
@@ -66,6 +91,7 @@ const Timelapse = () => {
         scrub: true,
       });
 
+      // --- fade in slides ---
       ScrollTrigger.create({
         trigger: ".about__body__timelapseContainer",
         start: "top 50%",
@@ -78,89 +104,66 @@ const Timelapse = () => {
         scrub: true,
       });
 
-      const slidesLtrContainer = document.querySelector<HTMLDivElement>(
-        ".about__body__timelapse__slides.leftToRight"
-      );
-
-      const slidesLtrContainerWidth = slidesLtrContainer?.offsetWidth as number;
-
       const scrollExtraPixels = 2000;
 
+      // --- horizontal scroll LTR rows ---
       gsap.utils
         .toArray(".about__body__timelapse__slides.leftToRight")
-        .forEach((slidesLtrContainer: any) => {
-          // const slidesLtrContainer = document.querySelector<HTMLDivElement>(
-          //   ".about__body__timelapse__slides.leftToRight"
-          // );
-
-          const slidesLtrContainerWidth =
-            slidesLtrContainer?.offsetWidth as number;
-
-          const slidesLtr = gsap.utils.toArray(
+        .forEach((slidesContainer: any) => {
+          const containerWidth = slidesContainer?.offsetWidth || 0;
+          const slides = gsap.utils.toArray(
             ".about__body__timelapse__slide",
-            slidesLtrContainer
-          );
-
-          gsap.to(slidesLtr, {
-            xPercent: -100 * (slidesLtr.length - 1),
+            slidesContainer
+          ) as HTMLElement[];
+          gsap.to(slides, {
+            xPercent: -100 * (slides.length - 1),
             ease: "none",
             scrollTrigger: {
               trigger: ".about__body__timelapse",
               start: "top top",
               scrub: true,
-              // snap: 1 / (slidesLtr.length - 1),
-              end: () => "+=" + (slidesLtrContainerWidth + scrollExtraPixels),
+              end: () => "+=" + (containerWidth + scrollExtraPixels),
             },
           });
         });
 
+      // --- horizontal scroll RTL rows ---
       gsap.utils
         .toArray(".about__body__timelapse__slides.rightToLeft")
-        .forEach((slidesRtlContainer: any) => {
-          // const slidesRtlContainer = document.querySelector<HTMLDivElement>(
-          //   ".about__body__timelapse__slides.rightToLeft"
-          // );
-
-          const slidesRtlContainerWidth =
-            slidesRtlContainer?.offsetWidth as number;
-
-          const slidesRtl = gsap.utils.toArray(
+        .forEach((slidesContainer: any) => {
+          const containerWidth = slidesContainer?.offsetWidth || 0;
+          const slides = gsap.utils.toArray(
             ".about__body__timelapse__slide",
-            slidesRtlContainer
-          );
-
-          gsap.to(slidesRtl, {
-            xPercent: 100 * (slidesRtl.length - 1),
+            slidesContainer
+          ) as HTMLElement[];
+          gsap.to(slides, {
+            xPercent: 100 * (slides.length - 1),
             ease: "none",
             scrollTrigger: {
               trigger: ".about__body__timelapse",
               start: "top top",
               scrub: true,
-              end: () => "+=" + (slidesRtlContainerWidth + scrollExtraPixels),
+              end: () => "+=" + (containerWidth + scrollExtraPixels),
             },
           });
         });
 
-      // gsap.set(".about__body__timelapse__slides", { autoAlpha: 0 });
-
-      // ScrollTrigger.create({
-      //   trigger: ".about__body__timelapse",
-      //   start: "top center",
-      //   end: "top top",
-      //   scrub: true,
-      //   animation: gsap.to(gsap.utils.toArray(".about__body__timelapse__slides"), {
-      //     autoAlpha: 1,
-      //     stagger: 1,
-      //     duration: 1,
-      //   }),
-      // });
+      // --- year counter animation ---
+      // Use the widest LTR row so the counter doesn't finish before scrolling ends
+      const ltrContainers = document.querySelectorAll<HTMLElement>(
+        ".about__body__timelapse__slides.leftToRight"
+      );
+      let maxLtrWidth = 0;
+      ltrContainers.forEach(
+        (c) => (maxLtrWidth = Math.max(maxLtrWidth, c?.offsetWidth || 0))
+      );
 
       gsap.set(".about__body__timelapse__year", { fontSize: "9rem" });
 
       ScrollTrigger.create({
         trigger: ".about__body__timelapse",
         start: "top top",
-        end: () => "+=" + (slidesLtrContainerWidth + scrollExtraPixels),
+        end: () => "+=" + (maxLtrWidth + scrollExtraPixels),
         animation: gsap.to(".about__body__timelapse__year", {
           textContent: 2024,
           snap: { textContent: 1 },
@@ -171,10 +174,11 @@ const Timelapse = () => {
         scrub: true,
       });
 
+      // --- pin the whole timelapse section ---
       ScrollTrigger.create({
         trigger: ".about__body__timelapse",
         start: "top top",
-        end: () => "+=" + (slidesLtrContainerWidth + scrollExtraPixels + 200),
+        end: () => "+=" + (maxLtrWidth + scrollExtraPixels + 200),
         scrub: true,
         pin: true,
         pinSpacing: true,
@@ -183,14 +187,15 @@ const Timelapse = () => {
 
     return () => ctx.revert();
   }, []);
+
   return (
     <div ref={timelapseRef}>
       <div className="about__body__timelapseContainer">
         <div className="about__body__timelapse">
-          <div className="about__body__timelapse__year">2002</div>
-          {createLtrSlides(imgsLtr)}
-          {createRtlSlides(imgsRtl)}
-          {createLtrSlides(imgsLtr2)}
+          <div className="about__body__timelapse__year">2008</div>
+          {createRow(row1Groups, "leftToRight")}
+          {createRow(row2Groups, "rightToLeft")}
+          {createRow(row3Groups, "leftToRight")}
         </div>
       </div>
     </div>

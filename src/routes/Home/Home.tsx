@@ -14,7 +14,7 @@ const Home = () => {
       <Events />
       <SupportUs />
       {/* <div className="fullscreen"></div> */}
-      <Footer mode="background" />
+      <Footer mode="primary" />
     </div>
   );
 };

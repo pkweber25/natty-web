@@ -4,14 +4,8 @@ import horizontalLoop from "../../../utils/horizontalLoop";
 import createInfinityText from "./../../../utils/createInifinityText";
 import { useRef, useLayoutEffect } from "react";
 
-import bow from "../../../assets/group_photos/bow_compressed.jpg";
-import brendan from "../../../assets/group_photos/brendan_mobile.jpg";
-import butter from "../../../assets/group_photos/butter_mobile.jpg";
-import in_costume from "../../../assets/group_photos/in_costume_mobile.jpg";
+import ImageSlot from "../../../components/ImageSlot/ImageSlot";
 
-import natty_running_vid from "../../../assets/natty_running.mp4";
-
-import { BiSolidTime } from "react-icons/bi";
 import { IoLocationSharp, IoTime } from "react-icons/io5";
 
 import { gsap } from "gsap";
@@ -23,6 +17,7 @@ class NattyEvent {
   place: string;
   descriptions: string[];
   image: string;
+  imageHint: string;
   index: number;
   eventCount: number;
 
@@ -32,6 +27,7 @@ class NattyEvent {
     place: string,
     descriptions: string[],
     image: string,
+    imageHint: string,
     index: number,
     eventCount: number
   ) {
@@ -40,46 +36,54 @@ class NattyEvent {
     this.place = place;
     this.descriptions = descriptions;
     this.image = image;
+    this.imageHint = imageHint;
     this.index = index;
     this.eventCount = eventCount;
   }
 
   generateEvent() {
+    const hasImage = this.image && this.image.length > 0;
     return (
       <article key={this.index} className="home__events__eventContainer">
         <div className="home__events__eventContents">
-          <div className="home__events__eventBackgroundImgContainer">
-            <div className="home__events__eventBackgroundImgOverlay"></div>
-            <div className="home__events__eventBackgroundImgWrapper">
-              <img
-                className="home__events__eventBackgroundImg"
-                src={this.image}
-                alt=""
-              />
-            </div>
-          </div>
-
-          <div className="home__events__eventContent">
-            <div className="home__events__eventImgContainer">
-              <div className="home__events__eventTitleContainer">
-                <h4 className="home__events__eventTitle">{this.title}</h4>
+          {hasImage && (
+            <div className="home__events__eventBackgroundImgContainer">
+              <div className="home__events__eventBackgroundImgOverlay"></div>
+              <div className="home__events__eventBackgroundImgWrapper">
+                <ImageSlot
+                  className="home__events__eventBackgroundImg"
+                  src={this.image}
+                  hint={this.imageHint}
+                  alt=""
+                  fill
+                />
               </div>
-              <div className="home__events__eventImgOverlay"></div>
-              <img src={this.image} alt="" className="home__events__eventImg" />
             </div>
+          )}            <div className="home__events__eventContent">
+              {hasImage ? (
+                <div className="home__events__eventImgContainer">
+                  <div className="home__events__eventTitleContainer">
+                    <h4 className="home__events__eventTitle">{this.title}</h4>
+                  </div>
+                  <div className="home__events__eventImgOverlay"></div>
+                  <ImageSlot
+                    src={this.image}
+                    hint={this.imageHint}
+                    alt=""
+                    className="home__events__eventImg"
+                  />
+                </div>
+              ) : (
+                <h4 className="home__events__eventTitle">{this.title}</h4>
+              )}
+
 
             <div className="home__events__eventDetailsContainer">
               <p className="home__events__eventDetails">
-                {/* <span className="home__events__eventDetailsHighlight">
-                  When?
-                </span>{" "} */}
                 <IoTime />
                 {this.time}
               </p>
               <p className="home__events__eventDetails">
-                {/* <span className="home__events__eventDetailsHighlight">
-                  Where?
-                </span>{" "} */}
                 <IoLocationSharp />
                 {this.place}
               </p>
@@ -147,47 +151,36 @@ const Events = () => {
 
   const nattyEventDescriptions = [
     {
-      title: "Fall Auditions 1",
-      time: "7:30PM, Tue. 9/5/2023",
-      place: "Squires 232",
+      title: "Auditions",
+      time: "TBD — held once in Fall and once in Spring",
+      place: "TBD",
       descriptions: [
         "Come audition for us! Prepare a verse and chorus of a song of your choosing.",
         "We'd love to hear your voice! No experience required.",
       ],
-      image: bow,
-    },
-    {
-      title: "Fall Auditions 2",
-      time: "7:30PM, Wed. 9/6/2023",
-      place: "Squires 342",
-      descriptions: [
-        "Come audition for us! Prepare a verse and chorus of a song of your choosing.",
-        "We'd love to hear your voice! No experience required.",
-      ],
-      image: brendan,
-    },
-    {
-      title: "Riff-Off Competition",
-      time: "6:00pm",
-      place: "Squires",
-      descriptions: ["Come out and support."],
-      image: butter,
-    },
-    {
-      title: "Game Night",
-      time: "10:00PM",
-      place: "Church St.",
-      descriptions: ["Get ready for a fun game night."],
-      image: in_costume,
+      image: "",
+      imageHint: "",
     },
   ];
 
+  const concertsSection = {
+    title: "Concerts",
+    subtitle: "Fall & Spring",
+    descriptions: [
+      "We hold a themed concert each semester — dates, times, and locations TBD.",
+      "Follow us on social media for announcements!",
+    ],
+    time: "TBD",
+    place: "TBD",
+  };
+
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".home__events__infinityText");
-      let loop = horizontalLoop(texts, {
+      const items = gsap.utils.toArray(".home__events__infinityTextItem");
+      horizontalLoop(items, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       // ScrollTrigger.create({
@@ -228,11 +221,6 @@ const Events = () => {
       //     // id: "card-" + i,
       //   });
       // });
-
-      const eventHeight = gsap.getProperty(
-        ".home__events__eventContainer",
-        "height"
-      ) as number;
 
       const events = gsap.utils.toArray<HTMLDivElement>(
         ".home__events__eventContainer"
@@ -294,7 +282,7 @@ const Events = () => {
       //   }
       // });
 
-      events.forEach((event, i) => {
+      events.forEach((event) => {
         const eventContents = event.querySelector<HTMLDivElement>(
           ".home__events__eventContents"
         );
@@ -399,16 +387,48 @@ const Events = () => {
           </p>
         </div>
 
+        {/* Concerts info section */}
+        <div className="home__events__eventContainer">
+          <div className="home__events__eventContents">
+            <div className="home__events__eventBackgroundImgContainer">
+              <div className="home__events__eventBackgroundImgOverlay"></div>
+            </div>
+            <div className="home__events__eventContent">
+              <h4 className="home__events__eventTitle">{concertsSection.title}</h4>
+              <p className="home__events__eventSubtitle">{concertsSection.subtitle}</p>
+              <div className="home__events__eventDetailsContainer">
+                <p className="home__events__eventDetails">
+                  <IoTime />
+                  {concertsSection.time}
+                </p>
+                <p className="home__events__eventDetails">
+                  <IoLocationSharp />
+                  {concertsSection.place}
+                </p>
+                {concertsSection.descriptions.map((desc, idx) => (
+                  <p key={idx} className="home__events__eventDetails">
+                    {desc}
+                  </p>
+                ))}
+              </div>
+            </div>
+            <div className="home__events__eventNumberIndicator">
+              <div className="home__event__eventNumberCircle current"></div>
+            </div>
+          </div>
+        </div>
+
         {nattyEventDescriptions.map(
-          ({ title, time, place, descriptions, image }, idx) => {
+          ({ title, time, place, descriptions, image, imageHint }, idx) => {
             const nattyEvent = new NattyEvent(
               title,
               time,
               place,
               descriptions,
               image,
-              idx,
-              nattyEventDescriptions.length
+              imageHint,
+              idx + 1,
+              nattyEventDescriptions.length + 1
             );
             return nattyEvent.generateEvent();
           }

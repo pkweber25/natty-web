@@ -181,7 +181,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../../../assets/in_high_spirits_small.png");
+  /* Album art: use ImageSlot in Stream.tsx */
   background-size: cover;
 }
 

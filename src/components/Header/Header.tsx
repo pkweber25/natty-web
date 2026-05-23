@@ -1,77 +1,48 @@
 import "./Header.css";
 import { useRef, useLayoutEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import NattySVG from "../NattySVG";
 
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  isActive ? "header__navbarLink header__navbarLink--active" : "header__navbarLink";
+
 const Header = () => {
   const headerRef = useRef(null);
 
   useLayoutEffect(() => {
-    let ctx = gsap.context(() => {
+    const ctx = gsap.context(() => {
       const navbarToggleTl = gsap
         .timeline({
           paused: true,
-          reversed: true,
-          defaults: { duration: 0.5, ease: "slow" },
+          defaults: { duration: 0.4, ease: "power3.inOut" },
         })
-        // .to(".header__navbar", { left: 0 })
-        // .to(
-        //   ".header__naturalH1",
-        //   {
-        //     // autoAlpha: 0,
-        //     width: 0,
-        //     ease: "slow",
-        //   },
-        //   0
-        // )
-        // .to(
-        //   ".header__naturalH2",
-        //   {
-        //     // autoAlpha: 0,
-        //     width: 0,
-        //     left: "100%",
-        //   },
-        //   0
-        // )
-        // .to(".header__natural", { transform: "skewY(0deg)" }, 0)
-        // .to(".header__navbar", { height: "100vh", top: 0 }, ">")
-        // .to(
-        //   ".header__toggleContainer",
-        //   {
-        //     border: "1px solid #fff",
-        //     backgroundColor: "#c3332b",
-        //   },
-        //   ">"
-        // )
-        // .to(
-        //   ".header__naturalV1",
-        //   {
-        //     transform: "rotate(45deg)",
-        //     backgroundColor: "#fff",
-        //     xPercent: -600,
-        //     // yPercent: 20,
-        //   },
-        //   ">"
-        // )
-        // .to(
-        //   ".header__naturalV2",
-        //   {
-        //     transform: "rotate(-45deg)",
-        //     backgroundColor: "#fff",
-        //     xPercent: -1400,
-        //     yPercent: -3,
-        //     // yPercent: -20,
-        //   },
-        //   "<"
-        // );
-        .to(".header__logoPath", { fill: "#c3332b" })
+        .fromTo(
+          ".header__overlay",
+          { autoAlpha: 0 },
+          { autoAlpha: 1, pointerEvents: "auto" },
+          0
+        )
+        .fromTo(
+          ".header__navbar",
+          { xPercent: 100, autoAlpha: 0 },
+          { xPercent: 0, autoAlpha: 1, pointerEvents: "auto" },
+          0
+        )
+        .to(".header__logoPath", { fill: "#c3332b" }, 0)
         .to(
           ".header__toggleContainer",
           { text: "CLOSE", color: "#c3332b" },
-          "<"
+          0
+        )
+        .fromTo(
+          ".header__navbarLink",
+          { autoAlpha: 0 },
+          { autoAlpha: 1, stagger: 0.06, duration: 0.35, ease: "power2.out" },
+          ">-0.15"
         );
 
       const showAnim = gsap
@@ -91,13 +62,28 @@ const Header = () => {
       });
 
       const navbarToggle = document.querySelector(".header__toggleContainer");
-      navbarToggle!.addEventListener("click", () => {
+      const closeMenu = () => {
+        if (!navbarToggleTl.reversed()) {
+          navbarToggleTl.reverse();
+        }
+      };
+
+      const toggleMenu = () => {
         if (navbarToggleTl.reversed()) {
           navbarToggleTl.play();
         } else {
           navbarToggleTl.reverse();
         }
-      });
+      };
+
+      navbarToggle?.addEventListener("click", toggleMenu);
+
+      document
+        .querySelectorAll(".header__navbarLink")
+        .forEach((link) => link.addEventListener("click", closeMenu));
+
+      const overlay = document.querySelector(".header__overlay");
+      overlay?.addEventListener("click", closeMenu);
     }, headerRef);
 
     return () => ctx.revert();
@@ -107,102 +93,44 @@ const Header = () => {
     <div ref={headerRef}>
       <div className="header__buttons">
         <div className="header__logoContainer">
-          <a href="#" className="header__logoLink">
+          <NavLink to="/" className="header__logoLink">
             <NattySVG
               nattySVGClass="header__logo"
               nattySVGPathClass="header__logoPath"
             />
-          </a>
+          </NavLink>
         </div>
-        <div className="header__toggleContainer">
-          {/* <div className="header__natural">
-            <span className="header__naturalV header__naturalV1"></span>
-            <span className="header__naturalV header__naturalV2"></span>
-            <span className="header__naturalH header__naturalH1"></span>
-            <span className="header__naturalH header__naturalH2"></span>
-          </div> */}
-          MENU
-        </div>
+        <div className="header__toggleContainer">MENU</div>
       </div>
+      <div className="header__overlay"></div>
       <header className="header">
         <div className="header__container">
           <nav className="header__navbar">
             <ul className="header__navbarList">
               <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
+                <NavLink to="/" className={navLinkClass} end>
                   Home
-                </a>
+                </NavLink>
               </li>
               <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
+                <NavLink to="/about" className={navLinkClass}>
                   About
-                </a>
+                </NavLink>
               </li>
               <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
+                <NavLink to="/boys" className={navLinkClass}>
                   The Boys
-                </a>
-                {/* <div className="header__liMoreContainer">
-                <div className="header__liMore">
-                  <span className="header__liMoreLine header__liMoreLine1"></span>
-                  <span className="header__liMoreLine header__liMoreLine2"></span>
-                </div>
-              </div>
-              <ul className="header__navbarSublist">
-                <li className="header__navbarSublistItem">
-                  <div className="header__navbarSublistItemBg"></div>
-                  <a href="#" className="header__navbarSublink">
-                    Current Members
-                  </a>
-                </li>
-                <li className="header__navbarSublistItem">
-                  <div className="header__navbarSublistItemBg"></div>
-                  <a href="#" className="header__navbarSublink">
-                    Legacy
-                  </a>
-                </li>
-              </ul> */}
+                </NavLink>
               </li>
               <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
+                <NavLink to="/music" className={navLinkClass}>
                   Music
-                </a>
-                {/* <div className="header__liMoreContainer">
-                <div className="header__liMore">
-                  <span className="header__liMoreLine header__liMoreLine1"></span>
-                  <span className="header__liMoreLine header__liMoreLine2"></span>
-                </div>
-              </div>
-              <ul className="header__navbarSublist">
-                <li className="header__navbarSublistItem">
-                  <a href="#" className="header__navbarSublink">
-                    Current Setlist
-                  </a>
-                  <div className="header__navbarSublistItemBg"></div>
-                </li>
-                <li className="header__navbarSublistItem">
-                  <div className="header__navbarSublistItemBg"></div>
-                  <a href="#" className="header__navbarSublink">
-                    Concerts
-                  </a>
-                </li>
-                <li className="header__navbarSublistItem">
-                  <div className="header__navbarSublistItemBg"></div>
-                  <a href="#" className="header__navbarSublink">
-                    Discography
-                  </a>
-                </li>
-              </ul> */}
+                </NavLink>
               </li>
               <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
-                  Gallery
-                </a>
-              </li>
-              <li className="header__navbarListItem">
-                <a href="#" className="header__navbarLink">
+                <NavLink to="/contact" className={navLinkClass}>
                   Contact
-                </a>
+                </NavLink>
               </li>
             </ul>
           </nav>

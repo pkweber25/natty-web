@@ -1,14 +1,9 @@
 import "./StreamParallax.css";
 
 import horizontalLoop from "../../../utils/horizontalLoop";
-import casting_off from "../../../assets/casting_off.jpg";
-import img_logo from "../../../assets/natty.svg";
-import in_high_spirits from "../../../assets/in_high_spirits_small.png";
-import NattySVG from "../../../components/NattySVG";
-
-import dudes from "../../../assets/album_cover/dudes_tall_mobile.png";
-import background from "../../../assets/album_cover/background_mobile.png";
-import sun from "../../../assets/album_cover/sun_tall_mobile.png";
+import createInfinityText from "../../../utils/createInifinityText";
+import ImageSlot from "../../../components/ImageSlot/ImageSlot";
+import { IMAGES } from "../../../config/images";
 
 import { useRef, useLayoutEffect } from "react";
 
@@ -20,10 +15,11 @@ const Stream = () => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".home__stream__infinityText");
-      let loop = horizontalLoop(texts, {
+      const items = gsap.utils.toArray(".home__stream__infinityTextItem");
+      horizontalLoop(items, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       // ScrollTrigger.create({
@@ -54,7 +50,13 @@ const Stream = () => {
 
       const parallaxTimeline = gsap
         .timeline()
-        .from(".home__stream__albumTitle", { yPercent: 700, duration: 0.5 })
+        .from(".home__stream__albumTitleWord--one", { yPercent: 150, duration: 0.5 }).from(".home__stream__albumTitleWord--more",
+          { yPercent: 150, duration: 0.5 },
+          ">-0.1"
+        ).from(".home__stream__albumTitleWord--shot",
+          { yPercent: 150, duration: 0.5 },
+          ">-0.1"
+        )
         .from(
           ".home__stream__albumArtDudesContainer",
           {
@@ -69,7 +71,11 @@ const Stream = () => {
           { yPercent: 100, scale: 1.4, duration: 1 },
           ">-1"
         )
-        .from(".home__stream__albumSubtitle", { autoAlpha: 0 })
+        .from(
+          ".home__stream__albumCoverContainer",
+          { yPercent: 80, scale: 0.6, autoAlpha: 0, duration: 1 },
+          ">-0.5"
+        )
         .from(".home__stream__listenBtn", { autoAlpha: 0, delay: 0.5 });
 
       // ScrollTrigger.create({
@@ -126,36 +132,32 @@ const Stream = () => {
   return (
     <div className="home__stream__container" ref={streamRef}>
       <section className="home__stream">
-        <div className="home__stream__infinityTextContainer">
-          <span className="home__stream__infinityText">
-            <NattySVG
-              nattySVGClass="home__stream__infinityTextLogoSVG"
-              nattySVGPathClass="home__stream__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__stream__infinityText">New Music Alert</span>
-          <span className="home__stream__infinityText">
-            <NattySVG
-              nattySVGClass="home__stream__infinityTextLogoSVG"
-              nattySVGPathClass="home__stream__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__stream__infinityText">New Music Alert</span>
-          <span className="home__stream__infinityText">
-            <NattySVG
-              nattySVGClass="home__stream__infinityTextLogoSVG"
-              nattySVGPathClass="home__stream__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__stream__infinityText">New Music Alert</span>
-        </div>
+        {createInfinityText("home__stream", 3, "", "New Music Alert")}
 
         <div className="home__stream__albumArtContainer">
           <div className="home__stream__albumArtSunContainer">
-            <img src={sun} alt="" className="home__stream__albumArtSun" />
+            <ImageSlot
+              src={IMAGES.music.albumSun}
+              hint="public/images/music/album-sun.png"
+              alt=""
+              className="home__stream__albumArtSun"
+            />
           </div>
           <div className="home__stream__albumArtDudesContainer">
-            <img src={dudes} alt="" className="home__stream__albumArtDudes" />
+            <ImageSlot
+              src={IMAGES.music.albumDudes}
+              hint="public/images/music/sharpGamesGroupPhoto.jpg"
+              alt=""
+              className="home__stream__albumArtDudes"
+            />
+          </div>
+          <div className="home__stream__albumCoverContainer">
+            <ImageSlot
+              src={IMAGES.music.oneMoreShotAlbumCover}
+              hint="public/images/music/oneMoreShotAlbumCover.png"
+              alt="One More Shot album cover"
+              className="home__stream__albumCover"
+            />
           </div>
           {/* <div className="home__stream__albumTitle">
             <div className="home__stream__albumTitleLine1">
@@ -164,20 +166,15 @@ const Stream = () => {
             <div className="home__stream__albumTitleLine2">Spirits</div>
           </div> */}
           <div className="home__stream__albumTitle">
-            <div className="home__stream__albumTitleLine1Container">
-              <div className="home__stream__albumTitleLine1">In High</div>
-            </div>
-            <div className="home__stream__albumTitleLine2Container">
-              <div className="home__stream__albumTitleLine2">Spirits</div>
+            <div className="home__stream__albumTitleRow">
+              <div className="home__stream__albumTitleWord home__stream__albumTitleWord--one">One</div>
+              <div className="home__stream__albumTitleWord home__stream__albumTitleWord--more">More</div>
+              <div className="home__stream__albumTitleWord home__stream__albumTitleWord--shot">Shot</div>
             </div>
           </div>
-          <div className="home__stream__albumSubtitle">out now</div>
-
-          <button className="home__stream__listenBtn">
-            <span className="home__stream__listenBtnUnderline">
-              Listen on Spotify
-            </span>
-          </button>
+          <a className="home__stream__listenBtn" href="https://open.spotify.com/album/4K2xusVE34XdQfp1AoLBo2?si=rz2gC-5jQXGlijLEqpGXBw" target="_blank" rel="noreferrer">
+            Listen on Spotify
+          </a>
         </div>
 
         {/* <p className="home__stream__text">

@@ -1,0 +1,72 @@
+.googleFormEmbed {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.googleFormEmbed__title {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--color-highlight);
+  margin-block-end: 1rem;
+}
+
+.googleFormEmbed__description {
+  font-size: var(--fs-p);
+  color: var(--color-body);
+  margin-block-end: 2rem;
+  font-weight: var(--fw-light);
+}
+
+.googleFormEmbed__iframe {
+  width: 100%;
+  min-height: 600px;
+  border: none;
+  border-radius: 4px;
+  background: var(--color-highlight);
+}
+
+.googleFormEmbed__placeholder {
+  padding: 3rem 2rem;
+  border: 2px dashed var(--color-highlight-opaque);
+  border-radius: 4px;
+  text-align: center;
+  color: var(--color-body);
+}
+
+.googleFormEmbed__placeholder code {
+  color: var(--color-highlight);
+  font-size: 0.9em;
+}
+
+.googleFormEmbed__placeholderHint {
+  margin-block-start: 1rem;
+  font-size: 1.4rem;
+  opacity: 0.8;
+}
+
+.googleFormEmbed__settingsNote {
+  max-width: 900px;
+  margin-inline: auto;
+  margin-block-start: 2rem;
+  color: var(--color-body);
+  font-size: 1.4rem;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.googleFormEmbed__settingsNote summary {
+  font-size: 1.4rem;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+.googleFormEmbed__settingsNote ul {
+  margin-block: 0.75rem;
+  padding-inline-start: 1.5rem;
+}
+
+.googleFormEmbed__settingsNote li {
+  margin-block: 0.5rem;
+  line-height: 1.5;
+}

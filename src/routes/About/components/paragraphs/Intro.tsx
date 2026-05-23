@@ -1,8 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import "./Intro.css";
 
-import bow from "../../../../assets/group_photos/bow_compressed.jpg";
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 

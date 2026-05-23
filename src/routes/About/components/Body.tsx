@@ -5,19 +5,13 @@ import { useLayoutEffect, useRef } from "react";
 import horizontalLoop from "../../../utils/horizontalLoop";
 import createInfinityText from "../../../utils/createInifinityText";
 
-import NattySVG from "../../../components/NattySVG";
-
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { Fragment } from "react";
-
-import nascar from "../../../assets/group_photos/nascar_mobile.jpg";
 import Intro from "./paragraphs/Intro";
 
 import Timelapse from "./paragraphs/Timelapse";
 import Performances from "./paragraphs/Performances";
-import Parallax from "./ParallaxSlides";
 
 const Body = () => {
   const bodyRef = useRef(null);
@@ -26,10 +20,11 @@ const Body = () => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".about__body__who__infinityText");
-      let loop = horizontalLoop(texts, {
+      const whoItems = gsap.utils.toArray(".about__body__who__infinityTextItem");
+      horizontalLoop(whoItems, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       const infinityContainer = document.querySelector<HTMLDivElement>(
@@ -50,10 +45,13 @@ const Body = () => {
         scrub: 2,
       });
 
-      const texts2 = gsap.utils.toArray(".about__body__what__infinityText");
-      let loop2 = horizontalLoop(texts2, {
+      const whatItems = gsap.utils.toArray(
+        ".about__body__what__infinityTextItem"
+      );
+      horizontalLoop(whatItems, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       const infinityContainer2 = document.querySelector<HTMLDivElement>(

@@ -5,8 +5,8 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import nascar from "../../../../assets/group_photos/nascar_mobile.jpg";
-import riffoff from "../../../../assets/group_photos/riffoff_compressed.jpg";
+import ImageSlot from "../../../../components/ImageSlot/ImageSlot";
+import { IMAGES } from "../../../../config/images";
 
 const Performances = () => {
   const performancesRef = useRef(null);
@@ -98,12 +98,29 @@ const Performances = () => {
             >
               Riff-Off Champs
             </div>
-            <img
-              src={riffoff}
-              alt=""
+            <ImageSlot
+              src={IMAGES.about.performanceRiffoff}
+              hint="public/images/events/relayForLife.png"
+              alt="Riff-off"
               className="about__body__performances__img"
             />
-            {/* <div className="about__body__performances__imgOverlay"></div> */}
+          </div>
+          <div
+            className="about__body__performances__imgContainer center"
+            data-speed="1.1"
+          >
+            <div
+              className="about__body__performances__imgCaption"
+              data-speed="1.05"
+            >
+              Sinkland Farms
+            </div>
+            <ImageSlot
+              src={IMAGES.about.sinklandFarms}
+              hint="public/images/events/sinklandfarms.png"
+              alt="Sinkland Farms performance"
+              className="about__body__performances__img"
+            />
           </div>
           <div
             className="about__body__performances__imgContainer right"
@@ -115,19 +132,17 @@ const Performances = () => {
             >
               NASCAR
             </div>
-            <img
-              src={nascar}
-              alt=""
+            <ImageSlot
+              src={IMAGES.about.performanceNascar}
+              hint="public/images/events/nascar.png"
+              alt="NASCAR performance"
               className="about__body__performances__img"
             />
-            {/* <div className="about__body__performances__imgOverlay"></div> */}
           </div>
         </div>
 
         <p className="about__body__performances__text">
-          Over the years, we’ve released several albums including A Decade Under
-          the Influence (2012), Acaholics Anonymous (2016), and Relapse (2018),
-          with another album coming out soon! We are also proud to be featured
+          Over the years, we’ve released several albums and EP's, hosted a concert every semester, and recently competed for the first time at CNU's Blue Tie Affair We are also proud to be featured
           in{" "}
           <span className="about__body__performances__textHighlight">
             BOCA 2014: Best Of College A Cappella

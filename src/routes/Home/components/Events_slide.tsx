@@ -1,15 +1,18 @@
 import "./Events.css";
 
-import NattySVG from "../../../components/NattySVG";
 import horizontalLoop from "../../../utils/horizontalLoop";
+import createInfinityText from "../../../utils/createInifinityText";
 import { useRef, useLayoutEffect } from "react";
 
-import bow from "../../../assets/group_photos/bow_compressed.jpg";
-import brendan from "../../../assets/group_photos/brendan_mobile.jpg";
-import butter from "../../../assets/group_photos/butter_mobile.jpg";
-import in_costume from "../../../assets/group_photos/in_costume_mobile.jpg";
+import ImageSlot from "../../../components/ImageSlot/ImageSlot";
+import { IMAGES } from "../../../config/images";
 
-import natty_running_vid from "../../../assets/natty_running.mp4";
+const EVENT_IMAGES = [
+  { src: IMAGES.events.event1, hint: "public/images/events/event-1.jpg" },
+  { src: IMAGES.events.event2, hint: "public/images/events/event-2.jpg" },
+  { src: IMAGES.events.event3, hint: "public/images/events/event-3.jpg" },
+  { src: IMAGES.events.event4, hint: "public/images/events/event-4.jpg" },
+];
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -19,10 +22,11 @@ const Events = () => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".home__events__infinityText");
-      let loop = horizontalLoop(texts, {
+      const items = gsap.utils.toArray(".home__events__infinityTextItem");
+      horizontalLoop(items, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       // ScrollTrigger.create({
@@ -136,35 +140,12 @@ const Events = () => {
   return (
     <div className="home__events__container" ref={eventsRef}>
       <section className="home__events">
-        <div className="home__events__infinityTextContainer">
-          <span className="home__events__infinityText">
-            <NattySVG
-              nattySVGClass="home__events__infinityTextLogoSVG"
-              nattySVGPathClass="home__events__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__events__infinityText">
-            Keeping Up with the Natty's
-          </span>
-          <span className="home__events__infinityText">
-            <NattySVG
-              nattySVGClass="home__events__infinityTextLogoSVG"
-              nattySVGPathClass="home__events__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__events__infinityText">
-            Keeping Up with the Natty's
-          </span>
-          <span className="home__events__infinityText">
-            <NattySVG
-              nattySVGClass="home__events__infinityTextLogoSVG"
-              nattySVGPathClass="home__events__infinityTextLogoSVGPath"
-            />
-          </span>
-          <span className="home__events__infinityText">
-            Keeping Up with the Natty's
-          </span>
-        </div>
+        {createInfinityText(
+          "home__events",
+          3,
+          "",
+          "Keeping Up with the Natty's"
+        )}
 
         <div className="home__events__mainContainer">
           <div className="home__events__mainTitleContainer">
@@ -186,10 +167,12 @@ const Events = () => {
           <div className="home__events__eventBackgroundImgContainer">
             <div className="home__events__eventBackgroundImgOverlay"></div>
             <div className="home__events__eventBackgroundImgWrapper">
-              <img
+              <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={bow}
+                src={EVENT_IMAGES[0].src}
+                hint={EVENT_IMAGES[0].hint}
                 alt=""
+                fill
               />
             </div>
           </div>
@@ -205,7 +188,12 @@ const Events = () => {
 
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
-              <img src={bow} alt="" className="home__events__eventImg" />
+              <ImageSlot
+                src={EVENT_IMAGES[0].src}
+                hint={EVENT_IMAGES[0].hint}
+                alt=""
+                className="home__events__eventImg"
+              />
             </div>
 
             <div className="home__events__eventDetailsContainer">
@@ -233,10 +221,12 @@ const Events = () => {
           <div className="home__events__eventBackgroundImgContainer">
             <div className="home__events__eventBackgroundImgOverlay"></div>
             <div className="home__events__eventBackgroundImgWrapper">
-              <img
+              <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={brendan}
+                src={EVENT_IMAGES[1].src}
+                hint={EVENT_IMAGES[1].hint}
                 alt=""
+                fill
               />
             </div>
           </div>
@@ -252,7 +242,12 @@ const Events = () => {
 
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
-              <img src={brendan} alt="" className="home__events__eventImg" />
+              <ImageSlot
+                src={EVENT_IMAGES[1].src}
+                hint={EVENT_IMAGES[1].hint}
+                alt=""
+                className="home__events__eventImg"
+              />
             </div>
 
             <div className="home__events__eventDetailsContainer">
@@ -279,10 +274,12 @@ const Events = () => {
           <div className="home__events__eventBackgroundImgContainer">
             <div className="home__events__eventBackgroundImgOverlay"></div>
             <div className="home__events__eventBackgroundImgWrapper">
-              <img
+              <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={butter}
+                src={EVENT_IMAGES[2].src}
+                hint={EVENT_IMAGES[2].hint}
                 alt=""
+                fill
               />
             </div>
           </div>
@@ -298,7 +295,12 @@ const Events = () => {
 
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
-              <img src={butter} alt="" className="home__events__eventImg" />
+              <ImageSlot
+                src={EVENT_IMAGES[2].src}
+                hint={EVENT_IMAGES[2].hint}
+                alt=""
+                className="home__events__eventImg"
+              />
             </div>
 
             <div className="home__events__eventDetailsContainer">
@@ -325,10 +327,12 @@ const Events = () => {
           <div className="home__events__eventBackgroundImgContainer">
             <div className="home__events__eventBackgroundImgOverlay"></div>
             <div className="home__events__eventBackgroundImgWrapper">
-              <img
+              <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={in_costume}
+                src={EVENT_IMAGES[3].src}
+                hint={EVENT_IMAGES[3].hint}
                 alt=""
+                fill
               />
             </div>
           </div>
@@ -344,7 +348,12 @@ const Events = () => {
 
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
-              <img src={in_costume} alt="" className="home__events__eventImg" />
+              <ImageSlot
+                src={EVENT_IMAGES[3].src}
+                hint={EVENT_IMAGES[3].hint}
+                alt=""
+                className="home__events__eventImg"
+              />
             </div>
 
             <div className="home__events__eventDetailsContainer">

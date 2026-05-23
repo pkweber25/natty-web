@@ -245,7 +245,7 @@
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  padding-block: calc(15% + 4rem) 15%;
+  padding-block: 6% 10%;
   padding-inline: 20px;
 }
 
@@ -256,7 +256,7 @@
 
 .home__events__eventTitle {
   position: relative;
-  color: var(--color-primary);
+  color: var(--color-highlight);
   font-size: 4rem;
   /* text-transform: uppercase; */
   font-family: var(--ff-serif);
@@ -267,8 +267,20 @@
   z-index: 1;
 }
 
+.home__events__eventContent > .home__events__eventTitle:first-child {
+  margin-block-end: 1rem;
+}
+
+.home__events__eventSubtitle {
+  color: var(--color-highlight);
+  font-size: 2rem;
+  font-weight: var(--fw-bold);
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+}
+
 .home__events__eventDetails {
-  margin-block-start: 5%;
+  margin-block-end: 4%;
   color: var(--color-highlight);
   text-transform: uppercase;
   line-height: 1.1;

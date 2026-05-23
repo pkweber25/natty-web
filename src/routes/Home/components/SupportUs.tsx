@@ -13,13 +13,13 @@ const SupportUs = () => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".home__supportUs__infinityText");
-      let loop = horizontalLoop(texts, {
+      const texts = gsap.utils.toArray(".home__supportUs__infinityTextItem");
+      horizontalLoop(texts, {
         repeat: -1,
         speed: 0.5,
       });
 
-      const spinningVinyl = gsap.to(".home__supportUs__titleContainer", {
+      gsap.to(".home__supportUs__titleContainer", {
         rotation: 360,
         repeat: -1,
         duration: 30,
@@ -165,10 +165,6 @@ const SupportUs = () => {
         <p className="home__supportUs__text">
           Help Naturally Sharp carry on our legacy. Any amount is appreciated!
         </p>
-
-        <button className="home__supportUs__btn home__supportUs__patreonBtn">
-          Join our Patreon
-        </button>
 
         <button className="home__supportUs__btn home__supportUs__venmoBtn">
           Venmo us

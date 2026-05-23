@@ -2,9 +2,8 @@ import "./Stream.css";
 
 import horizontalLoop from "../../../utils/horizontalLoop";
 import createInfinityText from "../../../utils/createInifinityText";
-import casting_off from "../../../assets/casting_off.jpg";
-import img_logo from "../../../assets/natty.svg";
-import in_high_spirits from "../../../assets/in_high_spirits_small.png";
+import ImageSlot from "../../../components/ImageSlot/ImageSlot";
+import { IMAGES } from "../../../config/images";
 
 import { useRef, useLayoutEffect } from "react";
 
@@ -16,10 +15,11 @@ const Stream = () => {
 
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const texts = gsap.utils.toArray(".home__stream__infinityText");
-      let loop = horizontalLoop(texts, {
+      const items = gsap.utils.toArray(".home__stream__infinityTextItem");
+      horizontalLoop(items, {
         repeat: -1,
         speed: 0.5,
+        paddingRight: 32,
       });
 
       ScrollTrigger.create({
@@ -48,31 +48,30 @@ const Stream = () => {
         <div className="home__stream__albumContainer">
           <div className="home__stream__albumTitle">
             <div className="home__stream__albumTitleLine1">
-              <span className="home__stream__albumTitleHighlight">In High</span>
+              <span className="home__stream__albumTitleHighlight">One</span>
             </div>
-            <div className="home__stream__albumTitleLine2">Spirits</div>
+            <div className="home__stream__albumTitleLine2">More Shot</div>
           </div>
           <div className="home__stream__albumImgContainer">
-            <img
-              src={in_high_spirits}
+            <ImageSlot
+              src={IMAGES.music.oneMoreShotAlbumCover}
+              hint="public/images/music/oneMoreShotAlbumCover.png"
               className="home__stream__albumImg"
-              alt=""
+              alt="One More Shot album cover"
             />
           </div>
           <div className="home__stream__albumSubtitle">out now!</div>
         </div>
 
         <p className="home__stream__text">
-          Naturally Sharp's fourth studio album,{" "}
-          <span className="home__stream__textHighlight">In High Spirits</span>,
+          Naturally Sharp's fifth studio album,{" "}
+          <span className="home__stream__textHighlight">One More Shot</span>,
           now available on all streaming platforms.
         </p>
 
-        <button className="home__stream__listenBtn">
-          <span className="home__stream__listenBtnUnderline">
-            Listen on Spotify
-          </span>
-        </button>
+        <a className="home__stream__listenBtn" href="https://open.spotify.com/artist/01bkxnhOwAMHZzRODFCvuB?si=byQF_R5wTVeljSoRCu8MoA" target="_blank" rel="noreferrer">
+          Listen on Spotify
+        </a>
 
         {/* <div className="home__stream__vinylContainer">
           <div className="home__stream__vinylOuter"></div>

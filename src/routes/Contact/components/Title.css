@@ -8,11 +8,20 @@
   justify-content: center;
   align-items: center;
 
-  background: url("../../../assets/group_photos/brendan_mobile.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  /* background-color: var(--color-primary); */
+  overflow: hidden;
+}
+
+.contact__title__bg {
+  z-index: 0;
+}
+
+.contact__title__overlay {
+  z-index: 1;
+}
+
+.contact__title__title {
+  z-index: 2;
+  position: relative;
 }
 
 .contact__title__overlay {

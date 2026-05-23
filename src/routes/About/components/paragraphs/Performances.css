@@ -1,5 +1,5 @@
 .about__body__performances {
-  padding-block: 25%;
+  padding-block: 12%;
 }
 
 .about__body__performances__text {
@@ -11,7 +11,7 @@
   /* text-align: justify;
       text-justify: inter-word; */
   padding-inline: 20px;
-  padding-block: 15%;
+  padding-block: 8%;
   z-index: 1;
   /* opacity: 0; */
   /* text-align: center; */
@@ -27,29 +27,38 @@
 .about__body__performances__imgsContainer {
   position: relative;
   width: 100%;
-  height: 20vh;
-  margin-block: 10%;
+  height: 70vh;
+  margin-block: 8%;
 }
 
 .about__body__performances__imgContainer {
   position: absolute;
-  width: 55%;
-  height: 100%;
+  width: 42%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.about__body__performances__imgContainer.right {
-  top: 17%;
-  right: -3%;
-  transform: rotate(-5deg);
+.about__body__performances__imgContainer.left {
+  top: 5%;
+  left: 1%;
+  transform: rotate(-2deg) scale(1.05);
+  z-index: 2;
 }
 
-.about__body__performances__imgContainer.left {
-  top: -17%;
-  left: -3%;
-  transform: rotate(4deg) scale(1.1);
+.about__body__performances__imgContainer.center {
+  top: 0%;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg) scale(1.1);
+  z-index: 3;
+}
+
+.about__body__performances__imgContainer.right {
+  top: 10%;
+  right: 1%;
+  transform: rotate(3deg) scale(1.05);
+  z-index: 1;
 }
 
 .about__body__performances__img {
@@ -57,21 +66,22 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
 .about__body__performances__imgCaption {
   position: absolute;
-  top: -18%;
+  top: -30%;
   font-family: var(--ff-serif);
   color: var(--color-primary);
   font-weight: var(--fw-bold);
   font-style: italic;
   font-size: 2.5rem;
-  z-index: 1;
-  /* background-color: var(--color-highlight); */
-
+  z-index: 5;
+  white-space: nowrap;
   padding-inline: 10px;
-  /* mix-blend-mode: hard-light; */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .about__body__performances__imgOverlay {

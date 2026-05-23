@@ -2,11 +2,10 @@ import "./Footer.css";
 
 import NattySVG from "../NattySVG";
 import { useRef, useLayoutEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import { AiFillInstagram } from "react-icons/ai";
 import {
   BsInstagram,
   BsYoutube,
@@ -14,10 +13,10 @@ import {
   BsFacebook,
   BsArrowUpRight,
   BsArrowUp,
-  BsBoxArrowRight,
   BsSuitHeartFill,
 } from "react-icons/bs";
-import { BiLogoVenmo, BiLogoPatreon } from "react-icons/bi";
+import { BiLogoVenmo } from "react-icons/bi";
+import { SiApplemusic } from "react-icons/si";
 
 interface Props {
   mode: string;
@@ -71,33 +70,76 @@ const Footer = ({ mode }: Props) => {
               nattySVGClass="footer__logoSVG"
               nattySVGPathClass="footer__logoSVGPath"
             />
-            <div className="footer__url footer__urlSpotify">
+            <a
+              href="https://open.spotify.com/artist/01bkxnhOwAMHZzRODFCvuB?si=byQF_R5wTVeljSoRCu8MoA"
+              className="footer__url footer__urlSpotify"
+              target="_blank"
+              rel="noreferrer"
+            >
               Listen on Spotify <BsArrowUpRight />
-            </div>
+            </a>
             <div className="footer__sectionHeader footer__navigate">
               Navigate
             </div>
-            <div className="footer__url footer__urlHome">Home</div>
-            <div className="footer__url footer__urlAbout">About</div>
-            <div className="footer__url footer__urlBoys">The Boys</div>
-            <div className="footer__url footer__urlMusic">Music</div>
-            <div className="footer__url footer__urlContact">Contact</div>
+            <Link to="/" className="footer__url footer__urlHome">
+              Home
+            </Link>
+            <Link to="/about" className="footer__url footer__urlAbout">
+              About
+            </Link>
+            <Link to="/boys" className="footer__url footer__urlBoys">
+              The Boys
+            </Link>
+            <Link to="/music" className="footer__url footer__urlMusic">
+              Music
+            </Link>
+            <Link to="/contact" className="footer__url footer__urlContact">
+              Contact
+            </Link>
             <div className="footer__sectionHeader footer__follow">
               Follow Us
             </div>
             <div className="footer__socialsGrid">
-              <div className="footer__socials footer__socials__instagram">
+                <a
+                href="https://www.instagram.com/naturallysharp/"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__socials footer__socials__instagram"
+              >
                 <BsInstagram />
-              </div>
-              <div className="footer__socials footer__socials__facebook">
+              </a>
+              <a
+                href="https://www.facebook.com/naturallysharp/"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__socials footer__socials__facebook"
+              >
                 <BsFacebook />
-              </div>
-              <div className="footer__socials footer__socials__youtube">
+              </a>
+              <a
+                href="https://www.youtube.com/vtnattysharp"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__socials footer__socials__youtube"
+              >
                 <BsYoutube />
-              </div>
-              <div className="footer__socials footer__socials__spotify">
+              </a>
+              <a
+                href="https://music.apple.com/us/artist/naturally-sharp/576611609"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__socials footer__socials__apple"
+              >
+                <SiApplemusic />
+              </a>
+              <a
+                href="https://open.spotify.com/artist/01bkxnhOwAMHZzRODFCvuB?si=byQF_R5wTVeljSoRCu8MoA"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__socials footer__socials__spotify"
+              >
                 <BsSpotify />
-              </div>
+              </a>
             </div>
             <div className="footer__sectionHeader footer__donateText">
               Donate
@@ -105,9 +147,6 @@ const Footer = ({ mode }: Props) => {
             <div className="footer__donateGrid">
               <div className="footer__donate footer__donate__venmo">
                 <BiLogoVenmo />
-              </div>
-              <div className="footer__donate footer__donate__patreon">
-                <BiLogoPatreon />
               </div>
             </div>
             <div className="footer__url footer__backToTop">
@@ -119,7 +158,7 @@ const Footer = ({ mode }: Props) => {
           </div>
           <div className="footer__credits">
             made with <BsSuitHeartFill className="footer__credits__icon" /> by
-            Kiet Nguyen and Sophia Spraker
+            Kiet Nguyen, Peter Weber, and Sophia Spraker
           </div>
         </div>
       </div>

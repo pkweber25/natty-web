@@ -73,6 +73,20 @@ div {
   box-sizing: border-box;
 }
 
+/* Horizontal marquee: logo + label move as one unit */
+[class*="__infinityTextItem"] {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 1.25rem;
+  padding-inline: 2rem;
+}
+
+[class*="__infinityText--logo"],
+[class*="__infinityText--label"] {
+  flex-shrink: 0;
+}
+
 /* End reset */
 
 body {
