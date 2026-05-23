@@ -18,7 +18,7 @@ function horizontalLoop(
   const tl = gsap.timeline({
       repeat: config.repeat,
       paused: config.paused,
-      defaults: { ease: "none" },
+      defaults: { ease: "none", force3D: true },
       onReverseComplete: () => {
         tl.totalTime(tl.rawTime() + tl.duration() * 100);
       },

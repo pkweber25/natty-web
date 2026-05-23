@@ -1,9 +1,11 @@
 import "./SupportUs.css";
 
 import NattySVG from "../../../components/NattySVG";
+import ImageSlot from "../../../components/ImageSlot/ImageSlot";
 import horizontalLoop from "../../../utils/horizontalLoop";
 import createInfinityText from "../../../utils/createInifinityText";
 import { useRef, useLayoutEffect } from "react";
+import { IMAGES } from "../../../config/images";
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -113,7 +115,7 @@ const SupportUs = () => {
   return (
     <div className="home__supportUs__container" ref={supportRef}>
       <div className="home__supportUs">
-        {createInfinityText("home__supportUs", 3, "", "We need money")}
+        {createInfinityText("home__supportUs", 6, "", "We need money")}
 
         <div className="home__supportUs__titleContainer">
           <svg
@@ -166,9 +168,23 @@ const SupportUs = () => {
           Help Naturally Sharp carry on our legacy. Any amount is appreciated!
         </p>
 
-        <button className="home__supportUs__btn home__supportUs__venmoBtn">
+        <a
+          href="https://account.venmo.com/u/NattySharp"
+          target="_blank"
+          rel="noreferrer"
+          className="home__supportUs__btn home__supportUs__venmoBtn"
+        >
           Venmo us
-        </button>
+        </a>
+
+        <div className="home__supportUs__venmoQR">
+          <ImageSlot
+            src={IMAGES.venmoQR}
+            alt="Venmo QR code"
+            className="home__supportUs__venmoQRImg"
+            loading="lazy"
+          />
+        </div>
 
         {/* <div className="home__supportUs__titleContainer">
           <div className="home__supportUs__title">

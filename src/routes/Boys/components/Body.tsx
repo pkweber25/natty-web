@@ -1,6 +1,7 @@
 import "./Body.css";
 
 import { useLayoutEffect, useRef, useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import horizontalLoop from "../../../utils/horizontalLoop";
 import createInfinityText from "../../../utils/createInifinityText";
@@ -36,14 +37,34 @@ const Body = () => {
   const bodyRef = useRef(null);
   const mainClassPrefix = "boys__body";
 
-  const [selectedMember, setSelectedMember] = useState<MemberInfo | null>(null);
+  interface CardRect {
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  }
 
-  const closeModal = useCallback(() => setSelectedMember(null), []);
+  const [selectedMemberInfo, setSelectedMemberInfo] = useState<{
+    member: MemberInfo;
+    index: number;
+    cardRect: CardRect;
+  } | null>(null);
 
+  const selectedMember = selectedMemberInfo?.member ?? null;
+  const selectedIndex = selectedMemberInfo?.index ?? -1;
+  const cardRect = selectedMemberInfo?.cardRect ?? null;
+
+  const loopRef = useRef<gsap.core.Timeline | null>(null);
+
+  const closeModal = useCallback(() => setSelectedMemberInfo(null), []);
+
+  // Pause/resume GSAP loop when modal opens/closes
   useEffect(() => {
     if (selectedMember) {
+      loopRef.current?.pause();
       document.body.style.overflow = "hidden";
     } else {
+      loopRef.current?.resume();
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
@@ -62,9 +83,13 @@ const Body = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const items = gsap.utils.toArray(".boys__body__crew__infinityTextItem");
-      horizontalLoop(items, { repeat: -1, speed: 0.5, paddingRight: 32 });
+      const tl = horizontalLoop(items, { repeat: -1, speed: 0.5, paddingRight: 32 });
+      loopRef.current = tl;
     }, bodyRef);
-    return () => ctx.revert();
+    return () => {
+      loopRef.current = null;
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -77,14 +102,27 @@ const Body = () => {
               <article
                 key={photo}
                 className="boys__body__card"
-                onClick={() => MEMBERS[i] && setSelectedMember(MEMBERS[i])}
+                onClick={(e) => {
+                  if (!MEMBERS[i]) return;
+                  const rect = e.currentTarget.getBoundingClientRect();
+                  setSelectedMemberInfo({
+                    member: MEMBERS[i],
+                    index: i,
+                    cardRect: {
+                      top: rect.top,
+                      left: rect.left,
+                      width: rect.width,
+                      height: rect.height,
+                    },
+                  });
+                }}
               >
                 <div className="boys__body__cardImgWrap">
                   <ImageSlot
                     src={photo}
-                    hint={`public/images/boys/${MEMBERS[i].name.toLowerCase().replace(/\s+/g, "")}.jpg`}
                     alt={MEMBERS[i].name}
                     className="boys__body__cardImg"
+                    loading="lazy"
                   />
                 </div>
                 <h4 className="boys__body__cardName">{MEMBERS[i].name}</h4>
@@ -101,41 +139,59 @@ const Body = () => {
         </div>
       </div>
 
-      {/* Member detail modal */}
-      {selectedMember && (
-        <div
-          className="boys__body__modalBackdrop"
-          onClick={closeModal}
-        >
+      {/* Member detail modal — positioned near clicked card via portal */}
+      {selectedMember && selectedIndex >= 0 && cardRect &&
+        createPortal(
           <div
-            className="boys__body__modal"
-            onClick={(e) => e.stopPropagation()}
+            className="boys__body__modalBackdrop"
+            onClick={closeModal}
           >
-            <button
-              className="boys__body__modalClose"
-              onClick={closeModal}
-              aria-label="Close"
+            <div
+              className="boys__body__modal"
+              style={{
+                top: Math.max(8, Math.min(cardRect.top + cardRect.height / 2 - 79, window.innerHeight - 158)),
+                left: Math.max(8, Math.min(cardRect.left + cardRect.width / 2 - 170, window.innerWidth - 348)),
+              }}
+              onClick={(e) => e.stopPropagation()}
             >
-              <IoClose />
-            </button>
-            <h2 className="boys__body__modalName">{selectedMember.name}</h2>
-            <div className="boys__body__modalDetail">
-              <span className="boys__body__modalLabel">Class</span>
-              <span className="boys__body__modalValue">{selectedMember.class}</span>
-            </div>
-            <div className="boys__body__modalDetail">
-              <span className="boys__body__modalLabel">Voice Part</span>
-              <span className="boys__body__modalValue">{selectedMember.part}</span>
-            </div>
-            {selectedMember.role && (
-              <div className="boys__body__modalDetail">
-                <span className="boys__body__modalLabel">E-Board</span>
-                <span className="boys__body__modalValue boys__body__modalRole">{selectedMember.role}</span>
+              <button
+                className="boys__body__modalClose"
+                onClick={closeModal}
+                aria-label="Close"
+              >
+                <IoClose />
+              </button>
+              <div className="boys__body__modalBody">
+                <div className="boys__body__modalThumb">
+                  <ImageSlot
+                    src={IMAGES.boys.members[selectedIndex]}
+                    alt={selectedMember.name}
+                    className="boys__body__modalThumbImg"
+                  />
+                </div>
+                <div className="boys__body__modalInfo">
+                  <h2 className="boys__body__modalName">{selectedMember.name}</h2>
+                  <div className="boys__body__modalDetail">
+                    <span className="boys__body__modalLabel">Class</span>
+                    <span className="boys__body__modalValue">{selectedMember.class}</span>
+                  </div>
+                  <div className="boys__body__modalDetail">
+                    <span className="boys__body__modalLabel">Voice Part</span>
+                    <span className="boys__body__modalValue">{selectedMember.part}</span>
+                  </div>
+                  {selectedMember.role && (
+                    <div className="boys__body__modalDetail">
+                      <span className="boys__body__modalLabel">E-Board</span>
+                      <span className="boys__body__modalValue boys__body__modalRole">{selectedMember.role}</span>
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
-        </div>
-      )}
+            </div>
+          </div>,
+          document.body
+        )
+      }
     </div>
   );
 };

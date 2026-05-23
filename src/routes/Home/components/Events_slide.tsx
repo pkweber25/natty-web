@@ -8,10 +8,10 @@ import ImageSlot from "../../../components/ImageSlot/ImageSlot";
 import { IMAGES } from "../../../config/images";
 
 const EVENT_IMAGES = [
-  { src: IMAGES.events.event1, hint: "public/images/events/event-1.jpg" },
-  { src: IMAGES.events.event2, hint: "public/images/events/event-2.jpg" },
-  { src: IMAGES.events.event3, hint: "public/images/events/event-3.jpg" },
-  { src: IMAGES.events.event4, hint: "public/images/events/event-4.jpg" },
+  IMAGES.events.event1,
+  IMAGES.events.event2,
+  IMAGES.events.event3,
+  IMAGES.events.event4,
 ];
 
 import { gsap } from "gsap";
@@ -169,8 +169,7 @@ const Events = () => {
             <div className="home__events__eventBackgroundImgWrapper">
               <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={EVENT_IMAGES[0].src}
-                hint={EVENT_IMAGES[0].hint}
+                src={EVENT_IMAGES[0]}
                 alt=""
                 fill
               />
@@ -189,8 +188,7 @@ const Events = () => {
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
               <ImageSlot
-                src={EVENT_IMAGES[0].src}
-                hint={EVENT_IMAGES[0].hint}
+                src={EVENT_IMAGES[0]}
                 alt=""
                 className="home__events__eventImg"
               />
@@ -223,8 +221,7 @@ const Events = () => {
             <div className="home__events__eventBackgroundImgWrapper">
               <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={EVENT_IMAGES[1].src}
-                hint={EVENT_IMAGES[1].hint}
+                src={EVENT_IMAGES[1]}
                 alt=""
                 fill
               />
@@ -243,8 +240,7 @@ const Events = () => {
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
               <ImageSlot
-                src={EVENT_IMAGES[1].src}
-                hint={EVENT_IMAGES[1].hint}
+                src={EVENT_IMAGES[1]}
                 alt=""
                 className="home__events__eventImg"
               />
@@ -276,8 +272,7 @@ const Events = () => {
             <div className="home__events__eventBackgroundImgWrapper">
               <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={EVENT_IMAGES[2].src}
-                hint={EVENT_IMAGES[2].hint}
+                src={EVENT_IMAGES[2]}
                 alt=""
                 fill
               />
@@ -296,8 +291,7 @@ const Events = () => {
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
               <ImageSlot
-                src={EVENT_IMAGES[2].src}
-                hint={EVENT_IMAGES[2].hint}
+                src={EVENT_IMAGES[2]}
                 alt=""
                 className="home__events__eventImg"
               />
@@ -329,8 +323,7 @@ const Events = () => {
             <div className="home__events__eventBackgroundImgWrapper">
               <ImageSlot
                 className="home__events__eventBackgroundImg"
-                src={EVENT_IMAGES[3].src}
-                hint={EVENT_IMAGES[3].hint}
+                src={EVENT_IMAGES[3]}
                 alt=""
                 fill
               />
@@ -349,8 +342,7 @@ const Events = () => {
             <div className="home__events__eventImgContainer">
               <div className="home__events__eventImgOverlay"></div>
               <ImageSlot
-                src={EVENT_IMAGES[3].src}
-                hint={EVENT_IMAGES[3].hint}
+                src={EVENT_IMAGES[3]}
                 alt=""
                 className="home__events__eventImg"
               />

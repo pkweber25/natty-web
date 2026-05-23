@@ -100,7 +100,6 @@ const Performances = () => {
             </div>
             <ImageSlot
               src={IMAGES.about.performanceRiffoff}
-              hint="public/images/events/relayForLife.png"
               alt="Riff-off"
               className="about__body__performances__img"
             />
@@ -117,7 +116,6 @@ const Performances = () => {
             </div>
             <ImageSlot
               src={IMAGES.about.sinklandFarms}
-              hint="public/images/events/sinklandfarms.png"
               alt="Sinkland Farms performance"
               className="about__body__performances__img"
             />
@@ -134,7 +132,6 @@ const Performances = () => {
             </div>
             <ImageSlot
               src={IMAGES.about.performanceNascar}
-              hint="public/images/events/nascar.png"
               alt="NASCAR performance"
               className="about__body__performances__img"
             />

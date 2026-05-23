@@ -90,5 +90,6 @@ export const IMAGES = {
   },
 
   /** Optional: also works from src/assets/groupPhoto.jpg if present */
+  venmoQR: "/images/venmoQR.png",
   groupPhoto: "/images/groupPhoto.jpg",
 } as const;

@@ -7,7 +7,6 @@ const Title = () => (
     <div className="music__title__titleContainer">
       <ImageSlot
         src={IMAGES.music.title}
-        hint="public/images/music/title.jpg"
         alt=""
         className="music__title__bg"
         fill

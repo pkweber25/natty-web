@@ -10,24 +10,22 @@ import { gsap } from "gsap";
 import { SiApplemusic } from "react-icons/si";
 import { FaSpotify } from "react-icons/fa";
 
-const APPLE_MUSIC_URL = "https://music.apple.com/us/artist/naturally-sharp/576611609";
-
 const albums = [
   {
     title: "One More Shot",
     year: "2026",
     cover: IMAGES.music.oneMoreShotAlbumCover,
-    coverHint: "public/images/music/oneMoreShotAlbumCover.png",
     blurb: "Our fifth studio album — out now on all streaming platforms.",
-    spotify: "https://open.spotify.com/artist/01bkxnhOwAMHZzRODFCvuB?si=byQF_R5wTVeljSoRCu8MoA",
+    spotify: "https://open.spotify.com/album/4K2xusVE34XdQfp1AoLBo2",
+    appleMusic: "https://music.apple.com/us/album/one-more-shot/1875361013",
   },
   {
     title: "Casting Off",
-    year: "Earlier",
+    year: "2020",
     cover: IMAGES.music.castingOff,
-    coverHint: "public/images/music/castingoff.png",
     blurb: "Fan favorites from past semesters and themed concerts.",
-    spotify: "https://open.spotify.com/artist/01bkxnhOwAMHZzRODFCvuB?si=byQF_R5wTVeljSoRCu8MoA",
+    spotify: "https://open.spotify.com/album/6eDZRup8yqnVTpv8tM8MKD",
+    appleMusic: "https://music.apple.com/us/album/casting-off-ep/1531167556",
   },
 ];
 
@@ -56,7 +54,6 @@ const Body = () => {
               <article key={album.title} className="music__body__album">
                 <ImageSlot
                   src={album.cover}
-                  hint={album.coverHint}
                   alt={`${album.title} album cover`}
                   className="music__body__albumCover"
                 />
@@ -73,7 +70,7 @@ const Body = () => {
                     <FaSpotify /> Spotify
                   </a>
                   <a
-                    href={APPLE_MUSIC_URL}
+                    href={album.appleMusic}
                     className="music__body__albumLink music__body__albumLink--apple"
                     target="_blank"
                     rel="noreferrer"

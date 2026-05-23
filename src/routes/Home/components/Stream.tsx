@@ -55,7 +55,6 @@ const Stream = () => {
           <div className="home__stream__albumImgContainer">
             <ImageSlot
               src={IMAGES.music.oneMoreShotAlbumCover}
-              hint="public/images/music/oneMoreShotAlbumCover.png"
               className="home__stream__albumImg"
               alt="One More Shot album cover"
             />

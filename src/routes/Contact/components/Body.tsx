@@ -38,23 +38,19 @@ const Body = () => {
         {createInfinityText(mainClassPrefix, 6, "reach", "Let's collaborate")}
 
         <div className="contact__body__content">
-          <p className="contact__body__intro">
-            Want Natty at your event, or tickets to our next show? Use the forms
-            below — we&apos;ll get back to you soon.
-          </p>
-
-          <GoogleFormEmbed
-            title="Book Birthday Sex"
-            description="Request Naturally Sharp for a private gig. Tell us your date, venue, and what you're looking for — we'll follow up with availability and pricing."
-            formUrl={BIRTHDAY_SEX_BOOKING_FORM_URL}
-            envHint="VITE_BIRTHDAY_SEX_BOOKING_FORM_URL"
-          />
 
           <GoogleFormEmbed
             title="Concert Tickets"
-            description="Reserve tickets for our next themed semester concert. Spots fill up fast — submit the form to secure yours."
+            description="Reserve tickets for our next themed semester concert. Form opens a few weeks before the concert."
             formUrl={CONCERT_TICKETS_FORM_URL}
             envHint="VITE_CONCERT_TICKETS_FORM_URL"
+          />
+
+          <GoogleFormEmbed
+            title="Book Birthday Sex"
+            description="Request Naturally Sharp for a private performance of birthday sex. Tell us your date, location, and time and we'll follow up over instagram."
+            formUrl={BIRTHDAY_SEX_BOOKING_FORM_URL}
+            envHint="VITE_BIRTHDAY_SEX_BOOKING_FORM_URL"
           />
 
           <section className="contact__body__general">

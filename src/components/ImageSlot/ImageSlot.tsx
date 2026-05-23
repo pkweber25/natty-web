@@ -10,6 +10,8 @@ interface ImageSlotProps {
   hint?: string;
   /** Cover parent when used as a background layer */
   fill?: boolean;
+  /** Loading strategy: "lazy" defers offscreen images, "eager" loads immediately */
+  loading?: "lazy" | "eager";
 }
 
 const ImageSlot = ({
@@ -18,6 +20,7 @@ const ImageSlot = ({
   className = "",
   hint,
   fill = false,
+  loading = "eager",
 }: ImageSlotProps) => {
   const [failed, setFailed] = useState(false);
   const showPlaceholder = !src || failed;
@@ -44,6 +47,8 @@ const ImageSlot = ({
     <img
       src={src}
       alt={alt}
+      decoding="async"
+      loading={loading}
       className={`imageSlot ${fill ? "imageSlot--fill" : ""} ${className}`.trim()}
       onError={() => setFailed(true)}
     />

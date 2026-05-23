@@ -1,4 +1,5 @@
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 import Home from "./routes/Home/Home";
 import About from "./routes/About/About";
 import Boys from "./routes/Boys/Boys";
@@ -68,6 +69,7 @@ function App() {
               <Route path="/music" element={<Music />} />
               <Route path="/contact" element={<Contact />} />
             </Routes>
+            <Footer mode="primary" />
           </div>
         </div>
       </div>

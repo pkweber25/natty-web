@@ -127,13 +127,8 @@
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  backdrop-filter: blur(4px);
-  animation: boysModalFadeIn 0.2s ease;
+  background: rgba(0, 0, 0, 0.5);
+  animation: boysModalFadeIn 0.15s ease;
 }
 
 @keyframes boysModalFadeIn {
@@ -142,56 +137,89 @@
 }
 
 .boys__body__modal {
-  position: relative;
+  position: fixed;
+  z-index: 1000;
   background: #1a1a1a;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  padding: 3rem 2.5rem 2.5rem;
-  max-width: 400px;
-  width: 100%;
-  max-height: calc(100vh - 4rem);
-  overflow-y: auto;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
-  animation: boysModalSlideUp 0.25s ease;
+  width: 340px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  animation: boysModalPop 0.2s ease;
 }
 
-@keyframes boysModalSlideUp {
-  from { transform: translateY(30px); opacity: 0; }
-  to   { transform: translateY(0);    opacity: 1; }
+@keyframes boysModalPop {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
 }
 
 .boys__body__modalClose {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: none;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.55);
   border: none;
-  color: var(--color-body);
-  font-size: 1.5rem;
+  border-radius: 50%;
+  color: var(--color-highlight);
+  font-size: 1.3rem;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 0.3rem;
   display: flex;
-  transition: color 0.15s;
+  transition: background 0.15s;
 }
 
 .boys__body__modalClose:hover {
-  color: var(--color-highlight);
+  background: rgba(0, 0, 0, 0.85);
+}
+
+/* ── Modal body (horizontal layout) ── */
+
+.boys__body__modalBody {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.boys__body__modalThumb {
+  width: 110px;
+  min-width: 110px;
+  height: 110px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background: #2a2a2a;
+}
+
+.boys__body__modalThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Modal info ── */
+
+.boys__body__modalInfo {
+  flex: 1;
+  min-width: 0;
 }
 
 .boys__body__modalName {
   color: var(--color-highlight);
-  font-size: 2rem;
+  font-size: 1.3rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  margin-block-end: 2rem;
-  text-align: center;
+  margin-block-end: 0.75rem;
+  line-height: 1.2;
 }
 
 .boys__body__modalDetail {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block: 0.75rem;
+  padding-block: 0.4rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -201,7 +229,7 @@
 
 .boys__body__modalLabel {
   color: var(--color-body);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   opacity: 0.7;
@@ -209,7 +237,7 @@
 
 .boys__body__modalValue {
   color: var(--color-highlight);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: var(--fw-bold);
   text-transform: uppercase;
 }

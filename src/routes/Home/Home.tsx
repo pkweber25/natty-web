@@ -4,7 +4,6 @@ import Events from "./components/Events";
 import SupportUs from "./components/SupportUs";
 
 import "./Home.css";
-import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   return (
@@ -14,7 +13,6 @@ const Home = () => {
       <Events />
       <SupportUs />
       {/* <div className="fullscreen"></div> */}
-      <Footer mode="primary" />
     </div>
   );
 };

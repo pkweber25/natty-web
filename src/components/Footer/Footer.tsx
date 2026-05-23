@@ -145,9 +145,14 @@ const Footer = ({ mode }: Props) => {
               Donate
             </div>
             <div className="footer__donateGrid">
-              <div className="footer__donate footer__donate__venmo">
+              <a
+                href="https://account.venmo.com/u/NattySharp"
+                target="_blank"
+                rel="noreferrer"
+                className="footer__donate footer__donate__venmo"
+              >
                 <BiLogoVenmo />
-              </div>
+              </a>
             </div>
             <div className="footer__url footer__backToTop">
               Back to top <BsArrowUp />

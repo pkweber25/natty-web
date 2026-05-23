@@ -17,7 +17,6 @@ class NattyEvent {
   place: string;
   descriptions: string[];
   image: string;
-  imageHint: string;
   index: number;
 
   constructor(
@@ -26,7 +25,6 @@ class NattyEvent {
     place: string,
     descriptions: string[],
     image: string,
-    imageHint: string,
     index: number
   ) {
     this.title = title;
@@ -34,7 +32,6 @@ class NattyEvent {
     this.place = place;
     this.descriptions = descriptions;
     this.image = image;
-    this.imageHint = imageHint;
     this.index = index;
   }
 
@@ -50,7 +47,6 @@ class NattyEvent {
                 <ImageSlot
                   className="home__events__eventBackgroundImg"
                   src={this.image}
-                  hint={this.imageHint}
                   alt=""
                   fill
                 />
@@ -65,7 +61,6 @@ class NattyEvent {
                   <div className="home__events__eventImgOverlay"></div>
                   <ImageSlot
                     src={this.image}
-                    hint={this.imageHint}
                     alt=""
                     className="home__events__eventImg"
                   />
@@ -137,27 +132,38 @@ const Events = () => {
 
   const nattyEventDescriptions = [
     {
-      title: "Auditions",
-      time: "TBD — held once in Fall and once in Spring",
-      place: "TBD",
+      title: "Spring Auditions — Day 1",
+      time: "Monday, February 2nd · 7:00pm – 9:00pm",
+      place: "Squires Student Center, Room 340",
       descriptions: [
-        "Come audition for us! Prepare a verse and chorus of a song of your choosing.",
-        "We'd love to hear your voice! No experience required.",
+        "Prepare a verse and chorus of a song that best highlights your vocal range and style.",
+        "Beatboxers: be ready to drop a freestyle for us!",
+        "No sign-ups necessary. Just show up 15 minutes early to fill out a quick form.",
+        "Keep an eye on your email after auditions for callback details.",
       ],
       image: "",
-      imageHint: "",
+    },
+    {
+      title: "Spring Auditions — Day 2",
+      time: "Tuesday, February 3rd · 7:30pm – 9:00pm",
+      place: "Squires Student Center, Room 305",
+      descriptions: [
+        "Same as Day 1 — choose the date that works best for you!",
+        "Keep an eye on your email after auditions for callback details.",
+      ],
+      image: "",
     },
   ];
 
   const concertsSection = {
-    title: "Concerts",
-    subtitle: "Fall & Spring",
+    title: "The Off-pitch",
+    subtitle: "🏆👔🗒️ Spring 2026 Concert",
     descriptions: [
-      "We hold a themed concert each semester — dates, times, and locations TBD.",
-      "Follow us on social media for announcements!",
+      "Our The Office-themed concert!",
+      "Doors open at 6:30pm — show starts at 7:00pm.",
     ],
-    time: "TBD",
-    place: "TBD",
+    time: "April 11th, 2026 · 7:00pm",
+    place: "Haymarket Theatre, Squires Student Center",
   };
 
   useLayoutEffect(() => {
@@ -401,14 +407,13 @@ const Events = () => {
         </div>
 
         {nattyEventDescriptions.map(
-          ({ title, time, place, descriptions, image, imageHint }, idx) => {
+          ({ title, time, place, descriptions, image }, idx) => {
             const nattyEvent = new NattyEvent(
               title,
               time,
               place,
               descriptions,
               image,
-              imageHint,
               idx + 1
             );
             return nattyEvent.generateEvent();

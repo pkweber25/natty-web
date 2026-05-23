@@ -33,10 +33,6 @@ const YEAR_GROUPS: YearGroup[] = [
   { year: 2024, start: 33, count: 3 },
 ];
 
-/** Generate a hint string for a given year and image index (1-based) */
-const hintFor = (year: number, idx: number) =>
-  `public/images/about/${year}.${idx}.png`;
-
 const Timelapse = () => {
   const timelapseRef = useRef(null);
   const mainClassPrefix = "about__body__timelapse";
@@ -60,7 +56,6 @@ const Timelapse = () => {
             <ImageSlot
               key={i}
               src={img}
-              hint={hintFor(group.year, i + 1)}
               alt={`Naturally Sharp ${group.year}`}
               className={`${mainClassPrefix}__slideImg`}
             />

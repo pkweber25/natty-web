@@ -98,7 +98,6 @@ const Stream = () => {
           <div className="home__stream__albumArtSunContainer">
             <ImageSlot
               src={IMAGES.music.albumSun}
-              hint="public/images/music/album-sun.png"
               alt=""
               className="home__stream__albumArtSun"
             />
@@ -106,7 +105,6 @@ const Stream = () => {
           <div className="home__stream__albumArtDudesContainer">
             <ImageSlot
               src={IMAGES.music.albumDudes}
-              hint="public/images/music/sharpGamesGroupPhoto.jpg"
               alt=""
               className="home__stream__albumArtDudes"
             />
@@ -114,7 +112,6 @@ const Stream = () => {
           <div className="home__stream__albumCoverContainer">
             <ImageSlot
               src={IMAGES.music.oneMoreShotAlbumCover}
-              hint="public/images/music/oneMoreShotAlbumCover.png"
               alt="One More Shot album cover"
               className="home__stream__albumCover"
             />

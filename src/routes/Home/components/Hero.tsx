@@ -61,7 +61,6 @@ const Hero = () => {
             <ImageSlot
               className="home__hero__backgroundImg"
               src={IMAGES.hero}
-              hint="public/images/hero/hero.jpg"
               alt="Naturally Sharp A Cappella on stage in dapper suits"
               fill
             />

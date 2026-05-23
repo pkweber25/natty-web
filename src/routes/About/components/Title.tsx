@@ -18,7 +18,6 @@ const Title = () => {
       <div className="about__title__titleContainer">
         <ImageSlot
           src={IMAGES.about.title}
-          hint="public/images/about/2024.3.png"
           alt=""
           className="about__title__bg"
           fill
